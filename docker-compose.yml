@@ -1,0 +1,32 @@
+
+version: '3.1'
+
+services:
+
+  wordpress:
+    image: wordpress
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: usuario
+      WORDPRESS_DB_PASSWORD: contrasenia
+      WORDPRESS_DB_NAME: ejemplodb
+    volumes:
+      - wordpress:/var/www/html
+
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: ejemplodb
+      MYSQL_USER: usuario
+      MYSQL_PASSWORD: contrasenia
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - db:/var/lib/mysql
+
+volumes:
+  wordpress:
+  db:
